@@ -1,0 +1,72 @@
+export type Article = {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  category: "publication" | "press" | "insight";
+  readTime: string;
+  author?: string;
+  featured?: boolean;
+  imageUrl?: string;
+  link?: string;
+};
+
+export const articles: Article[] = [
+  {
+    id: "a1",
+    title: "Amaravati Quantum Valley Announces Quantum Computers Initiative",
+    excerpt:
+      "Highlights from the Amaravati Quantum Valley announcement, focusing on the establishment of quantum computing infrastructure and the growth of India's quantum ecosystem.",
+    date: "2026-02-07",
+    category: "press",
+    readTime: "3 min",
+    featured: true,
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781023863/DAS_5340_g7me7u.jpg",
+    link: "https://www.linkedin.com/posts/amaravati-quantum-valley-quantum-computers-share-7465660005392945152-SieP/",
+  },
+  {
+    id: "a2",
+    title: "Principal Scientific Adviser Highlights Quantum Innovation",
+    excerpt:
+      "A discussion on India's quantum technology roadmap and the role of indigenous quantum computing initiatives in advancing national capabilities.",
+    date: "2026-02-07",
+    category: "publication",
+    readTime: "4 min",
+    featured: true,
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781023913/Screenshot_2026-06-09_222110_ym7lbg.png",
+    link: "https://www.linkedin.com/posts/principal-scientific-adviser-to-the-government-ugcPost-7449851435250372609-7-w2/",
+  },
+  {
+    id: "a3",
+    title: "Andhra Pradesh Emerging as a Quantum Technology Hub",
+    excerpt:
+      "Industry leaders and innovators discuss the opportunities being created through Andhra Pradesh's investment in quantum technologies and advanced manufacturing.",
+    date: "2026-01-15",
+    category: "insight",
+    readTime: "5 min",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781024008/1776170355903_jlqwvl.jpg",
+    link: "https://www.linkedin.com/posts/india-andhrapradesh-deccanfounders-share-7449798429800652800-2qJv/",
+  },
+  {
+    id: "a4",
+    title: "The India Way: Building a Sustainable Quantum Ecosystem",
+    excerpt:
+      "Perspectives on strengthening India's position in quantum computing through innovation, collaboration, and indigenous technology development.",
+    date: "2025-12-10",
+    category: "publication",
+    readTime: "6 min",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781024008/1780987927822_nfgvuk.jpg",
+    link: "https://www.linkedin.com/posts/bharatstrategicapexinstitute-bsai-theindiaway-ugcPost-7470006850126741504-P-St/",
+  },
+];
+
+export const articleCategories = [
+  { id: "all", label: "All" },
+  { id: "publication", label: "Publications" },
+  { id: "press", label: "Press" },
+  { id: "insight", label: "Insights" },
+] as const;
