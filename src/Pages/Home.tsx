@@ -5,11 +5,9 @@ import LinkedBlogsSection from "../Components/LinkedBlogsSection.tsx";
 import PressMediaHomeSection from "../Components/PressMediaHomeSection.tsx";
 import GalleryHomeSection from "../Components/GalleryHomeSection.tsx";
 import VideosHomeSection from "../Components/VideosHomeSection.tsx";
-import { Link } from "react-router-dom";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+import AppLink from "../Components/AppLink.tsx";
 
 function Home() {
-  const { ref: partnersRef, visible: partnersVisible } = useScrollReveal<HTMLElement>();
   const logosModules = import.meta.glob("../assets/logos/*.{png,jpg,jpeg,svg}", { eager: true });
   const logos: string[] = (Object.values(logosModules) as { default: string }[]).map(
     (module) => module.default,
@@ -39,12 +37,7 @@ function Home() {
 
       <VideosHomeSection />
 
-      <section
-        ref={partnersRef}
-        className={`bg-gradient-to-b from-[#f7f5f2] to-surface-warm py-16 sm:py-20 lg:py-24 ${
-          partnersVisible ? "animate-[fadeUp_0.7s_ease-out_both]" : "opacity-0"
-        }`}
-      >
+      <section className="bg-gradient-to-b from-[#f7f5f2] to-surface-warm py-16 sm:py-20 lg:py-24">
           <div className="mx-auto max-w-7xl px-5 text-center sm:px-8 lg:px-10">
             <span className="font-display text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-petal">
               Collaborations
@@ -98,24 +91,24 @@ function Home() {
                 </p>
               </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:flex-col lg:min-w-[200px]">
-                <Link
+                <AppLink
                   to="/contactus"
                   className="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 font-display text-sm font-semibold text-deep transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Get in Touch
-                </Link>
-                <Link
+                </AppLink>
+                <AppLink
                   to="/careers"
                   className="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 font-display text-sm font-semibold text-white transition hover:bg-white/15"
                 >
                   Careers
-                </Link>
-                <Link
+                </AppLink>
+                <AppLink
                   to="/gallery"
                   className="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 font-display text-sm font-semibold text-white transition hover:bg-white/15"
                 >
                   Gallery
-                </Link>
+                </AppLink>
               </div>
             </div>
           </div>

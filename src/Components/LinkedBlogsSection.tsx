@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import AppLink from "./AppLink";
 import { articles, type Article } from "../data/articlesData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 import SectionViewAllLink from "./SectionViewAllLink";
 
 const categorySource: Record<Article["category"], string> = {
@@ -41,14 +40,14 @@ function LinkedBlogListItem({ article }: { article: Article }) {
             />
           </a>
         ) : (
-          <Link to="/publications" className="shrink-0 overflow-hidden rounded-md">
+          <AppLink to="/publications" className="shrink-0 overflow-hidden rounded-md">
             <img
               src={article.imageUrl}
               alt=""
               className="h-20 w-20 object-cover transition duration-500 hover:scale-105 sm:h-24 sm:w-24"
               loading="lazy"
             />
-          </Link>
+          </AppLink>
         ))}
       <div className="flex min-w-0 flex-1 flex-col justify-center">
         <p className="text-[0.6875rem] text-text-muted sm:text-xs">{formatMeta(article)}</p>
@@ -58,9 +57,9 @@ function LinkedBlogListItem({ article }: { article: Article }) {
               {article.title}
             </a>
           ) : (
-            <Link to="/publications" className={titleLinkClass}>
+            <AppLink to="/publications" className={titleLinkClass}>
               {article.title}
-            </Link>
+            </AppLink>
           )}
         </h3>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-text-muted sm:text-sm">
@@ -71,9 +70,9 @@ function LinkedBlogListItem({ article }: { article: Article }) {
             Read blog
           </a>
         ) : (
-          <Link to="/publications" className={readLinkClass}>
+          <AppLink to="/publications" className={readLinkClass}>
             Read blog
-          </Link>
+          </AppLink>
         )}
       </div>
     </article>
@@ -81,16 +80,10 @@ function LinkedBlogListItem({ article }: { article: Article }) {
 }
 
 function LinkedBlogsSection() {
-  const { ref, visible } = useScrollReveal<HTMLElement>();
   const blogItems = articles;
 
   return (
-    <section
-      ref={ref}
-      className={`bg-white px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 ${
-        visible ? "animate-[fadeUp_0.7s_ease-out_both]" : "opacity-0"
-      }`}
-    >
+    <section className="bg-white px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
           <div>

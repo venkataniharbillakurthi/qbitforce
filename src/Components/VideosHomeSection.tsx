@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import AppLink from "./AppLink";
 import { videos, type VideoItem } from "../data/videosData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 
 function InlinePlayer({ video }: { video: VideoItem }) {
   if (video.youtubeId) {
@@ -150,7 +149,6 @@ function VideoStripCard({
 }
 
 function VideosHomeSection() {
-  const { ref, visible } = useScrollReveal<HTMLElement>();
   const [featured] = videos;
   const [activeVideo, setActiveVideo] = useState<VideoItem>(featured ?? videos[0]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -163,12 +161,7 @@ function VideosHomeSection() {
   };
 
   return (
-    <section
-      ref={ref}
-      className={`relative overflow-hidden px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 ${
-        visible ? "animate-[fadeUp_0.7s_ease-out_both]" : "opacity-0"
-      }`}
-    >
+    <section className="relative overflow-hidden px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
       <div className="absolute inset-0 bg-gradient-to-br from-deep via-mid to-navy" />
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
@@ -189,12 +182,12 @@ function VideosHomeSection() {
               Videos & Media
             </h2>
           </div>
-          <Link
+          <AppLink
             to="/videos"
             className="shrink-0 rounded-full border border-white/30 px-4 py-1.5 font-display text-xs font-semibold text-white no-underline transition hover:border-white hover:bg-white/10 sm:text-sm"
           >
             View all
-          </Link>
+          </AppLink>
         </div>
 
         <div className="mt-6 grid gap-4 lg:mt-8 lg:grid-cols-5 lg:gap-5">

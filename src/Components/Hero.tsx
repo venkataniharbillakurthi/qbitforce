@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import AppLink from "./AppLink";
 import { heroSlides } from "../content/mediaHub";
 
 const SLIDE_INTERVAL = 6000;
@@ -81,19 +81,19 @@ function Hero() {
           </h1>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Link
+            <AppLink
               to="/contactus"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-petal px-5 py-2.5 font-display text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#e01820]"
             >
               Get in Touch
               <span aria-hidden>→</span>
-            </Link>
-            <Link
+            </AppLink>
+            <AppLink
               to="/company"
               className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-5 py-2.5 font-display text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
             >
               Our mission
-            </Link>
+            </AppLink>
           </div>
         </div>
 

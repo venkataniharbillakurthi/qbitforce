@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import AppLink from "./AppLink";
 import { FaLinkedinIn, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import logoImage from "../assets/QFwhite.png";
@@ -44,7 +44,7 @@ function Footer() {
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid gap-8 border-b border-white/10 pb-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)] lg:gap-12 lg:pb-14">
           <div className="max-w-sm sm:col-span-2 lg:col-span-1 lg:max-w-xs">
-            <Link to="/" className="mb-5 inline-flex items-center gap-3.5 no-underline transition hover:opacity-90">
+            <AppLink to="/" className="mb-5 inline-flex items-center gap-3.5 no-underline transition hover:opacity-90">
               <img src={logoImage} alt="Qbit Force Quantum" className="h-auto w-[52px]" />
               <div className="flex flex-col leading-tight">
                 <span className="font-display text-lg font-bold tracking-tight text-white">Qbit Force</span>
@@ -52,7 +52,7 @@ function Footer() {
                   Quantum
                 </span>
               </div>
-            </Link>
+            </AppLink>
             <p className="mb-6 text-[0.9375rem] leading-relaxed text-white/65">
               Made in Amaravati, Built for the World — indigenous quantum hardware for India&apos;s
               National Quantum Mission.
@@ -104,12 +104,12 @@ function Footer() {
               <ul className="m-0 list-none p-0">
                 {col.links.map((link) => (
                   <li key={link.to} className="mb-2">
-                    <Link
+                    <AppLink
                       to={link.to}
                       className="inline-block py-0.5 text-[0.9375rem] font-medium text-white/78 no-underline transition hover:translate-x-1 hover:text-white"
                     >
                       {link.label}
-                    </Link>
+                    </AppLink>
                   </li>
                 ))}
               </ul>
@@ -123,13 +123,13 @@ function Footer() {
           </p>
           <div className="flex flex-wrap justify-center gap-5">
             {legalLinks.map((link) => (
-              <Link
+              <AppLink
                 key={link.to}
                 to={link.to}
                 className="text-[0.8125rem] text-white/50 no-underline transition hover:text-petal"
               >
                 {link.label}
-              </Link>
+              </AppLink>
             ))}
           </div>
         </div>

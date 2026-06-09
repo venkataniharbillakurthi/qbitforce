@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import AppLink from "./AppLink";
 import { galleryItems } from "../data/galleryData";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 import SectionViewAllLink from "./SectionViewAllLink";
 
 const categoryLabel: Record<string, string> = {
@@ -21,7 +20,7 @@ function MosaicTile({
   large?: boolean;
 }) {
   return (
-    <Link
+    <AppLink
       to="/gallery"
       className={`group relative block overflow-hidden bg-deep ${className}`}
     >
@@ -47,24 +46,18 @@ function MosaicTile({
       <div className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100 sm:h-8 sm:w-8">
         <span className="text-xs">↗</span>
       </div>
-    </Link>
+    </AppLink>
   );
 }
 
 function GalleryHomeSection() {
-  const { ref, visible } = useScrollReveal<HTMLElement>();
   const items = galleryItems.slice(0, 5);
   const [featured, ...rest] = items;
 
   if (!featured) return null;
 
   return (
-    <section
-      ref={ref}
-      className={`bg-[#f7f5f2] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 ${
-        visible ? "animate-[fadeUp_0.7s_ease-out_both]" : "opacity-0"
-      }`}
-    >
+    <section className="bg-[#f7f5f2] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -107,13 +100,13 @@ function GalleryHomeSection() {
         {/* Category strip */}
         <div className="mt-4 flex flex-wrap gap-2">
           {["facility", "events", "hardware", "news"].map((cat) => (
-            <Link
+            <AppLink
               key={cat}
               to="/gallery"
               className="rounded-full border border-navy/15 bg-white px-3 py-1 font-display text-[0.6875rem] font-semibold text-navy no-underline transition hover:border-petal hover:text-petal"
             >
               {categoryLabel[cat]}
-            </Link>
+            </AppLink>
           ))}
         </div>
       </div>

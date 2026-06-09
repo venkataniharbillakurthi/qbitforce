@@ -1,4 +1,5 @@
 import { Link, type LinkProps } from "react-router-dom";
+import type { MouseEvent } from "react";
 import { useComingSoon } from "../context/ComingSoonContext";
 
 type Props = LinkProps & {
@@ -13,9 +14,9 @@ function AppLink({ to, onClick, children, className, comingSoonLabel: _label, ..
     return (
       <button
         type="button"
-        className={className}
+        className={`cursor-pointer border-none bg-transparent p-0 text-left ${className ?? ""}`}
         onClick={(event) => {
-          onClick?.(event as unknown as React.MouseEvent<HTMLAnchorElement>);
+          onClick?.(event as unknown as MouseEvent<HTMLAnchorElement>);
           openComingSoon();
         }}
       >

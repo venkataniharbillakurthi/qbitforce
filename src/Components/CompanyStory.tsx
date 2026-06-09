@@ -1,15 +1,9 @@
-import { Link } from "react-router-dom";
+import AppLink from "./AppLink";
 import { companyStoryImages } from "../content/mediaHub";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 
 function CompanyStory() {
-  const { ref, visible } = useScrollReveal<HTMLElement>();
-
   return (
-    <section
-      ref={ref}
-      className={`bg-white py-16 sm:py-20 lg:py-24 ${visible ? "animate-[fadeUp_0.7s_ease-out_both]" : "opacity-0"}`}
-    >
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -30,13 +24,13 @@ function CompanyStory() {
               computers in Amaravati — catalyzing a high-tech ecosystem for research, industry, and
               MSME participation across India.
             </p>
-            <Link
+            <AppLink
               to="/company"
               className="mt-8 inline-flex items-center gap-2 font-display text-sm font-semibold text-petal transition hover:gap-3"
             >
               Learn more about us
               <span aria-hidden>→</span>
-            </Link>
+            </AppLink>
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -45,8 +39,7 @@ function CompanyStory() {
                 key={item.id}
                 className={`group overflow-hidden rounded-xl border border-border bg-surface-warm shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${
                   index === 0 ? "col-span-2 aspect-[16/9]" : "aspect-square"
-                } ${visible ? "animate-[fadeUp_0.6s_ease-out_both]" : "opacity-0"}`}
-                style={{ animationDelay: `${0.1 + index * 0.08}s` }}
+                }`}
               >
                 <img
                   src={item.imageUrl}
@@ -54,9 +47,9 @@ function CompanyStory() {
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                <figcaption className="border-t border-border bg-white p-3">
-                  <p className="font-display text-xs font-semibold text-navy">{item.title}</p>
-                  <p className="mt-0.5 text-[0.6875rem] leading-snug text-text-muted">
+                <figcaption className="border-t border-border bg-white px-3 py-2.5 sm:px-4 sm:py-3">
+                  <p className="font-display text-xs font-semibold text-navy sm:text-sm">{item.title}</p>
+                  <p className="mt-0.5 text-[0.6875rem] leading-snug text-text-muted sm:text-xs">
                     {item.caption}
                   </p>
                 </figcaption>

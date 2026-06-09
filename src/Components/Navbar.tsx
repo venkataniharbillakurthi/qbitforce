@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import AppLink from "./AppLink";
 import logo from "../assets/QFLogo.png";
 
 const companyLinks = [
@@ -114,7 +115,7 @@ function Navbar() {
   const heroNav = isHome && !scrolled && !expanded;
 
   const contactCta = (
-    <Link
+    <AppLink
       className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-petal to-[#e01820] px-5 py-2.5 font-display text-sm font-semibold text-white no-underline shadow-[0_4px_14px_rgba(255,30,38,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(255,30,38,0.38)]"
       to="/contactus"
       onClick={closeMenu}
@@ -123,7 +124,7 @@ function Navbar() {
       <span className="transition group-hover:translate-x-0.5" aria-hidden>
         →
       </span>
-    </Link>
+    </AppLink>
   );
 
   const mobileNavItems = [
@@ -144,9 +145,9 @@ function Navbar() {
         }`}
       >
         <div className="mx-auto flex min-h-[var(--nav-height)] max-w-7xl items-center gap-4 overflow-visible px-5 sm:px-8 lg:px-10 max-lg:pr-[max(1.25rem,env(safe-area-inset-right,0px))]">
-          <Link to="/" className="flex shrink-0 items-center no-underline" onClick={closeMenu}>
+          <AppLink to="/" className="flex shrink-0 items-center no-underline" onClick={closeMenu}>
             <img src={logo} alt="Qbit Force Quantum" className="block h-12 w-auto transition hover:scale-[1.03]" />
-          </Link>
+          </AppLink>
 
           <button
             className="ml-auto flex h-11 w-11 shrink-0 flex-col items-center justify-center rounded-full border border-border bg-white p-0 text-navy shadow-sm transition hover:bg-[#f7f5f2] lg:hidden max-lg:mr-1.5 max-lg:h-12 max-lg:w-12"
@@ -180,9 +181,9 @@ function Navbar() {
             <div className="flex flex-1 justify-center overflow-visible">
               <ul className={`m-0 flex list-none items-center gap-1 overflow-visible ${navPillClass}`}>
                 <li>
-                  <Link className={navLinkClass(isActive("/"))} to="/" onClick={closeMenu}>
+                  <AppLink className={navLinkClass(isActive("/"))} to="/" onClick={closeMenu}>
                     Home
-                  </Link>
+                  </AppLink>
                 </li>
 
                 <li
@@ -210,7 +211,7 @@ function Navbar() {
                     }`}
                   >
                     {companyLinks.map((link) => (
-                      <Link
+                      <AppLink
                         key={link.to}
                         to={link.to}
                         className="flex flex-col gap-0.5 rounded-xl px-4 py-3.5 no-underline transition hover:translate-x-0.5 hover:bg-[rgba(0,1,127,0.06)]"
@@ -218,15 +219,15 @@ function Navbar() {
                       >
                         <span className="font-display text-sm font-semibold text-navy">{link.label}</span>
                         <span className="text-xs text-text-muted">{link.desc}</span>
-                      </Link>
+                      </AppLink>
                     ))}
                   </div>
                 </li>
 
                 <li>
-                  <Link className={navLinkClass(isActive("/products"))} to="/products" onClick={closeMenu}>
+                  <AppLink className={navLinkClass(isActive("/products"))} to="/products" onClick={closeMenu}>
                     Products
-                  </Link>
+                  </AppLink>
                 </li>
 
                 <li
@@ -255,7 +256,7 @@ function Navbar() {
                   >
                     <div className="grid grid-cols-2 gap-1">
                       {mediaLinks.map((link) => (
-                        <Link
+                        <AppLink
                           key={link.to}
                           to={link.to}
                           className="flex flex-col gap-0.5 rounded-xl px-4 py-3.5 no-underline transition hover:translate-x-0.5 hover:bg-[rgba(0,1,127,0.06)]"
@@ -263,16 +264,16 @@ function Navbar() {
                         >
                           <span className="font-display text-sm font-semibold text-navy">{link.label}</span>
                           <span className="text-xs text-text-muted">{link.desc}</span>
-                        </Link>
+                        </AppLink>
                       ))}
                     </div>
                   </div>
                 </li>
 
                 <li>
-                  <Link className={navLinkClass(isActive("/careers"))} to="/careers" onClick={closeMenu}>
+                  <AppLink className={navLinkClass(isActive("/careers"))} to="/careers" onClick={closeMenu}>
                     Careers
-                  </Link>
+                  </AppLink>
                 </li>
               </ul>
             </div>
@@ -317,7 +318,7 @@ function Navbar() {
                       className={`border-b border-[#f0ece8] ${expanded ? "animate-[mobileNavItemIn_0.4s_cubic-bezier(0.4,0,0.2,1)_both]" : "opacity-0"}`}
                       style={{ animationDelay: `${0.05 + index * 0.05}s` }}
                     >
-                      <Link
+                      <AppLink
                         to={item.to}
                         className={`flex min-h-[52px] w-full items-center px-5 py-4 font-display text-base font-semibold text-navy no-underline transition hover:bg-[#f7f5f2] ${
                           item.active
@@ -327,7 +328,7 @@ function Navbar() {
                         onClick={closeMenu}
                       >
                         {item.label}
-                      </Link>
+                      </AppLink>
                     </li>
                   );
                 }
@@ -369,7 +370,7 @@ function Navbar() {
                             className={isOpen ? "animate-[mobileSubItemIn_0.35s_cubic-bezier(0.4,0,0.2,1)_both]" : ""}
                             style={{ animationDelay: `${0.12 + subIndex * 0.04}s` }}
                           >
-                            <Link
+                            <AppLink
                               to={link.to}
                               className={`flex flex-col gap-0.5 border-t border-[rgba(232,228,223,0.7)] py-3.5 pl-7 pr-5 no-underline transition hover:bg-[rgba(0,1,127,0.04)] hover:pl-8 ${
                                 isActive(link.to)
@@ -382,7 +383,7 @@ function Navbar() {
                                 {link.label}
                               </span>
                               <span className="text-[0.8125rem] leading-snug text-text-muted">{link.desc}</span>
-                            </Link>
+                            </AppLink>
                           </li>
                         ))}
                       </ul>
@@ -397,13 +398,13 @@ function Navbar() {
             className={`shrink-0 border-t border-border bg-white px-5 py-4 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))] shadow-[0_-8px_24px_rgba(0,1,127,0.06)] ${expanded ? "animate-[mobileNavItemIn_0.4s_cubic-bezier(0.4,0,0.2,1)_both]" : "opacity-0"}`}
             style={{ animationDelay: "0.3s" }}
           >
-            <Link
+            <AppLink
               className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-br from-petal to-[#e01820] px-6 py-3.5 font-display text-[0.9375rem] font-semibold text-white no-underline shadow-[0_4px_14px_rgba(255,30,38,0.28)]"
               to="/contactus"
               onClick={closeMenu}
             >
               Get in Touch →
-            </Link>
+            </AppLink>
           </div>
         </div>
       </div>

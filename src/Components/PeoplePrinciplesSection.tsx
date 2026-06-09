@@ -4,7 +4,6 @@ import {
   principlesTopRow,
   type PrinciplesPanel,
 } from "../content/principlesSection";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const solidStyles = {
   navy: "bg-navy text-white",
@@ -57,13 +56,8 @@ function Panel({ panel }: { panel: PrinciplesPanel }) {
 }
 
 function PeoplePrinciplesSection() {
-  const { ref, visible } = useScrollReveal<HTMLElement>();
-
   return (
-    <section
-      ref={ref}
-      className={`bg-white px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14 ${visible ? "animate-[fadeUp_0.7s_ease-out_both]" : "opacity-0"}`}
-    >
+    <section className="bg-white px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
       <div className="mx-auto max-w-6xl text-center">
         <h2 className="font-display text-[clamp(1.35rem,3vw,2rem)] font-normal leading-tight tracking-tight text-text">
           {principlesHeadline.line1}
