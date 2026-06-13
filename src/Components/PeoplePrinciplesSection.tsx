@@ -4,7 +4,6 @@ import {
   principlesTopRow,
   type PrinciplesPanel,
 } from "../content/principlesSection";
-
 const solidStyles = {
   navy: "bg-navy text-white",
   petal: "bg-petal text-white",

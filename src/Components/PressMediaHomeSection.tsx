@@ -1,4 +1,4 @@
-import AppLink from "./AppLink";
+import { Link } from "react-router-dom";
 import { newsMediaImages, type MediaImage } from "../content/mediaHub";
 import PressMediaImage from "./PressMediaImage";
 import SectionViewAllLink from "./SectionViewAllLink";
@@ -10,7 +10,7 @@ function PressMediaCard({ item, index }: { item: MediaImage; index: number }) {
 
   return (
     <article className="group flex flex-col">
-      <AppLink to="/press" className="block">
+      <Link to="/press" className="block">
         <PressMediaImage
           src={item.imageUrl}
           alt={item.title}
@@ -18,19 +18,19 @@ function PressMediaCard({ item, index }: { item: MediaImage; index: number }) {
           className="aspect-[4/5] sm:aspect-[3/4]"
           priority={index === 0}
         />
-      </AppLink>
+      </Link>
       <span className="mt-2.5 font-display text-[0.625rem] font-bold uppercase tracking-wider text-petal">
         Media
       </span>
       <h3 className="mt-0.5 font-display text-sm font-bold leading-snug text-text sm:text-base">
-        <AppLink to="/press" className={titleLinkClass}>
+        <Link to="/press" className={titleLinkClass}>
           {item.title}
-        </AppLink>
+        </Link>
       </h3>
       <p className="mt-1 line-clamp-3 text-xs leading-relaxed text-text-muted">{item.caption}</p>
-      <AppLink to="/press" className={readMoreClass}>
+      <Link to="/press" className={readMoreClass}>
         Read More
-      </AppLink>
+      </Link>
     </article>
   );
 }

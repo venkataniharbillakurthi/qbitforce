@@ -35,7 +35,7 @@
 @keyframes pageEnter {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -117,13 +117,6 @@
     html {
       scroll-behavior: smooth;
     }
-
-    a,
-    button {
-      transition-property: color, background-color, border-color, opacity, box-shadow, transform;
-      transition-duration: 0.25s;
-      transition-timing-function: ease-out;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -143,6 +136,13 @@
     background: var(--color-surface-warm);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  img,
+  video {
+    max-width: 100%;
   }
 
   h1,

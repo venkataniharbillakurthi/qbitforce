@@ -1,5 +1,56 @@
 /** Central media store — update URLs here to refresh site-wide content */
 
+export const siteLogoUrl =
+  "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192857/QFLogo-Bsun1Dcj_tzycu8.png";
+
+export const siteLogoWhiteUrl =
+  "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192854/QFwhite-DghykY62_m1pfwk.png";
+
+export const indiaMapUrl =
+  "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/Indiamap-DA7EbyRf_eu2u3f.jpg";
+
+/** Partner / client logos — update URLs here */
+export const partnerLogos = [
+  {
+    id: "partner-techqubit",
+    name: "TechQubit",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192857/TechQubit-luAw_Uld_vrcxzj.jpg",
+  },
+  {
+    id: "partner-amber",
+    name: "Amber",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192854/Amber-C3xYVwVj_tob5ik.png",
+  },
+  {
+    id: "partner-srm",
+    name: "SRM University AP",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192855/SRM-360I-l_J_h4naja.jpg",
+  },
+] as const;
+
+/** Team member photos — update URLs here */
+export const teamPhotoUrls = {
+  venkat:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192859/Venkat-Bo_L1uKO_jcqwtk.jpg",
+  gopaljoshi:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192855/gopaljoshi-CZvOC0Rb_nrwwo5.jpg",
+  subhash:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/Subhash1-7yZhVpAJ_qxiwno.jpg",
+  nagalakshmaiah:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192857/Nagalakshmaiah-xC-2JkVm_qjzjzc.jpg",
+  pallavi:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192857/Pallavi-BMHGTMLE_whqm1c.jpg",
+  durgaPritam:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/DurgaPritam-B_hQrdU3_aucbwo.jpg",
+  chandanesh:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/Chandanesh-hLko5rXq_cdyf4r.jpg",
+  rupa:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192855/Rupa-j_kkHFft_ghwn8g.jpg",
+} as const;
+
 export type HeroSlide = {
   id: string;
   type: "image" | "video";

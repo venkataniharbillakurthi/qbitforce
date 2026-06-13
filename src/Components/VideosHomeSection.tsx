@@ -1,7 +1,6 @@
 import { useState } from "react";
-import AppLink from "./AppLink";
+import { Link } from "react-router-dom";
 import { videos, type VideoItem } from "../data/videosData";
-
 function InlinePlayer({ video }: { video: VideoItem }) {
   if (video.youtubeId) {
     return (
@@ -182,12 +181,12 @@ function VideosHomeSection() {
               Videos & Media
             </h2>
           </div>
-          <AppLink
+          <Link
             to="/videos"
             className="shrink-0 rounded-full border border-white/30 px-4 py-1.5 font-display text-xs font-semibold text-white no-underline transition hover:border-white hover:bg-white/10 sm:text-sm"
           >
             View all
-          </AppLink>
+          </Link>
         </div>
 
         <div className="mt-6 grid gap-4 lg:mt-8 lg:grid-cols-5 lg:gap-5">

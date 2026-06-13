@@ -1,4 +1,4 @@
-import AppLink from "./AppLink";
+import { Link } from "react-router-dom";
 import { articles, type Article } from "../data/articlesData";
 import SectionViewAllLink from "./SectionViewAllLink";
 
@@ -40,14 +40,14 @@ function LinkedBlogListItem({ article }: { article: Article }) {
             />
           </a>
         ) : (
-          <AppLink to="/publications" className="shrink-0 overflow-hidden rounded-md">
+          <Link to="/publications" className="shrink-0 overflow-hidden rounded-md">
             <img
               src={article.imageUrl}
               alt=""
               className="h-20 w-20 object-cover transition duration-500 hover:scale-105 sm:h-24 sm:w-24"
               loading="lazy"
             />
-          </AppLink>
+          </Link>
         ))}
       <div className="flex min-w-0 flex-1 flex-col justify-center">
         <p className="text-[0.6875rem] text-text-muted sm:text-xs">{formatMeta(article)}</p>
@@ -57,9 +57,9 @@ function LinkedBlogListItem({ article }: { article: Article }) {
               {article.title}
             </a>
           ) : (
-            <AppLink to="/publications" className={titleLinkClass}>
+            <Link to="/publications" className={titleLinkClass}>
               {article.title}
-            </AppLink>
+            </Link>
           )}
         </h3>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-text-muted sm:text-sm">
@@ -70,9 +70,9 @@ function LinkedBlogListItem({ article }: { article: Article }) {
             Read blog
           </a>
         ) : (
-          <AppLink to="/publications" className={readLinkClass}>
+          <Link to="/publications" className={readLinkClass}>
             Read blog
-          </AppLink>
+          </Link>
         )}
       </div>
     </article>

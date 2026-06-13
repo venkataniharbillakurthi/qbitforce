@@ -68,7 +68,7 @@ function ContactUs() {
         intro="Connect with us to discover our products, cutting-edge technologies, and opportunities to grow with us on our journey from Amaravati to the world."
       />
 
-      <section className="-mt-8 bg-surface-warm py-16 sm:py-20 lg:py-24">
+      <section className="bg-surface-warm py-10 sm:py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="grid overflow-hidden rounded-2xl border border-border shadow-lg lg:grid-cols-[380px_1fr]">
             <aside className="bg-gradient-to-br from-deep via-mid to-slate text-white">

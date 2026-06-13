@@ -5,13 +5,10 @@ import LinkedBlogsSection from "../Components/LinkedBlogsSection.tsx";
 import PressMediaHomeSection from "../Components/PressMediaHomeSection.tsx";
 import GalleryHomeSection from "../Components/GalleryHomeSection.tsx";
 import VideosHomeSection from "../Components/VideosHomeSection.tsx";
-import AppLink from "../Components/AppLink.tsx";
+import { Link } from "react-router-dom";
+import { partnerLogos } from "../content/mediaHub";
 
 function Home() {
-  const logosModules = import.meta.glob("../assets/logos/*.{png,jpg,jpeg,svg}", { eager: true });
-  const logos: string[] = (Object.values(logosModules) as { default: string }[]).map(
-    (module) => module.default,
-  );
 
   return (
     <>
@@ -53,25 +50,21 @@ function Home() {
               className="mx-auto my-8 h-[3px] w-20 rounded-full bg-gradient-to-r from-petal via-blue-light to-petal"
               aria-hidden
             />
-            {logos.length > 0 ? (
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-                {logos.map((logo, index) => (
-                  <div
-                    key={index}
-                    className="flex h-20 w-36 items-center justify-center rounded-xl border border-border bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:h-24 sm:w-44"
-                    style={{ animationDelay: `${0.05 + index * 0.05}s` }}
-                  >
-                    <img src={logo} alt={`Partner ${index + 1}`} className="max-h-full max-w-full object-contain" />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="mx-auto max-w-md rounded-xl bg-[#f7f5f2] px-8 py-8">
-                <p className="text-sm text-text-muted">
-                  Partner logos will appear as collaborations are announced.
-                </p>
-              </div>
-            )}
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+              {partnerLogos.map((partner) => (
+                <div
+                  key={partner.id}
+                  className="flex h-20 w-36 items-center justify-center rounded-xl border border-border bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:h-24 sm:w-44"
+                >
+                  <img
+                    src={partner.imageUrl}
+                    alt={partner.name}
+                    className="max-h-full max-w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -91,24 +84,24 @@ function Home() {
                 </p>
               </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:flex-col lg:min-w-[200px]">
-                <AppLink
+                <Link
                   to="/contactus"
                   className="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 font-display text-sm font-semibold text-deep transition hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Get in Touch
-                </AppLink>
-                <AppLink
+                </Link>
+                <Link
                   to="/careers"
                   className="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 font-display text-sm font-semibold text-white transition hover:bg-white/15"
                 >
                   Careers
-                </AppLink>
-                <AppLink
+                </Link>
+                <Link
                   to="/gallery"
                   className="inline-flex items-center justify-center rounded-md border border-white/30 bg-white/10 px-6 py-3 font-display text-sm font-semibold text-white transition hover:bg-white/15"
                 >
                   Gallery
-                </AppLink>
+                </Link>
               </div>
             </div>
           </div>

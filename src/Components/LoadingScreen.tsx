@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logo from "../assets/QFwhite.png";
+import { siteLogoWhiteUrl } from "../content/mediaHub";
 
 type Props = {
   exiting: boolean;
@@ -7,8 +7,8 @@ type Props = {
   onExitComplete: () => void;
 };
 
-const MIN_DISPLAY_MS = 2000;
-const FADE_OUT_MS = 1400;
+const MIN_DISPLAY_MS = 1200;
+const FADE_OUT_MS = 900;
 
 function LoadingScreen({ exiting, onReady, onExitComplete }: Props) {
   const [logoVisible, setLogoVisible] = useState(false);
@@ -46,7 +46,7 @@ function LoadingScreen({ exiting, onReady, onExitComplete }: Props) {
     <div
       className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-deep via-mid to-navy ease-in-out ${
         exiting
-          ? "pointer-events-none opacity-0 transition-opacity duration-[1400ms]"
+          ? "pointer-events-none opacity-0 transition-opacity duration-[900ms]"
           : "opacity-100"
       }`}
       aria-hidden={exiting}
@@ -55,14 +55,14 @@ function LoadingScreen({ exiting, onReady, onExitComplete }: Props) {
       <div
         className={`relative flex flex-col items-center transition-all duration-700 ease-out ${
           logoVisible ? "scale-100 opacity-100" : "scale-90 opacity-0"
-        } ${exiting ? "scale-105 opacity-0 transition-all duration-[1400ms]" : ""}`}
+        } ${exiting ? "scale-105 opacity-0 transition-all duration-[900ms]" : ""}`}
       >
         <div className="relative flex h-36 w-36 items-center justify-center sm:h-44 sm:w-44">
           <div className="absolute inset-0 animate-[splashRing_2.4s_linear_infinite] rounded-full border-2 border-transparent border-t-petal border-r-petal/40" />
           <div className="absolute inset-3 animate-[splashRing_3.2s_linear_infinite_reverse] rounded-full border border-transparent border-b-blue-light/70 border-l-blue-light/30" />
           <div className="animate-[splashPulse_2s_ease-in-out_infinite]">
             <img
-              src={logo}
+              src={siteLogoWhiteUrl}
               alt="Qbit Force Quantum"
               className="h-16 w-auto sm:h-24"
               width={180}

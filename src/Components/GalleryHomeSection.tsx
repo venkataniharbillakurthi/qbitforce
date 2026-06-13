@@ -1,4 +1,4 @@
-import AppLink from "./AppLink";
+import { Link } from "react-router-dom";
 import { galleryItems } from "../data/galleryData";
 import SectionViewAllLink from "./SectionViewAllLink";
 
@@ -20,17 +20,17 @@ function MosaicTile({
   large?: boolean;
 }) {
   return (
-    <AppLink
+    <Link
       to="/gallery"
       className={`group relative block overflow-hidden bg-deep ${className}`}
     >
       <img
         src={item.imageUrl}
         alt={item.title}
-        className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent opacity-80 transition group-hover:opacity-90" />
+      <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent opacity-80" />
       <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
         <span className="font-display text-[0.625rem] font-bold uppercase tracking-wider text-petal">
           {categoryLabel[item.category] ?? item.category}
@@ -43,10 +43,7 @@ function MosaicTile({
           {item.title}
         </p>
       </div>
-      <div className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-white/15 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100 sm:h-8 sm:w-8">
-        <span className="text-xs">↗</span>
-      </div>
-    </AppLink>
+    </Link>
   );
 }
 
@@ -74,7 +71,6 @@ function GalleryHomeSection() {
           <SectionViewAllLink to="/gallery" />
         </div>
 
-        {/* Bento mosaic */}
         <div className="mt-6 grid h-[320px] grid-cols-4 grid-rows-2 gap-2 sm:mt-8 sm:h-[380px] sm:gap-2.5 lg:h-[420px]">
           <MosaicTile
             item={featured}
@@ -94,19 +90,6 @@ function GalleryHomeSection() {
               item={item}
               className={i === 1 ? "rounded-br-xl sm:rounded-br-2xl" : ""}
             />
-          ))}
-        </div>
-
-        {/* Category strip */}
-        <div className="mt-4 flex flex-wrap gap-2">
-          {["facility", "events", "hardware", "news"].map((cat) => (
-            <AppLink
-              key={cat}
-              to="/gallery"
-              className="rounded-full border border-navy/15 bg-white px-3 py-1 font-display text-[0.6875rem] font-semibold text-navy no-underline transition hover:border-petal hover:text-petal"
-            >
-              {categoryLabel[cat]}
-            </AppLink>
           ))}
         </div>
       </div>

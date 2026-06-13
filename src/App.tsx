@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useCallback, useState } from "react";
 import MainContent from "./Layout/MainContent.tsx";
 import LoadingScreen from "./Components/LoadingScreen.tsx";
-import HomeOnlyGuard from "./Components/HomeOnlyGuard.tsx";
 import Home from "./Pages/Home.tsx";
 import Company from "./Pages/Company.tsx";
 import OurTeam from "./Pages/OurTeam.tsx";
@@ -16,7 +15,6 @@ import Publications from "./Pages/Publications.tsx";
 import Videos from "./Pages/Videos.tsx";
 import Press from "./Pages/Press.tsx";
 import ScrollToTop from "./Components/ScrollToTop.tsx";
-import { ComingSoonProvider } from "./context/ComingSoonContext.tsx";
 
 function App() {
   const [showLoader, setShowLoader] = useState(true);
@@ -40,104 +38,25 @@ function App() {
         />
       )}
       <BrowserRouter>
-        <ComingSoonProvider>
-          <div className="flex min-h-screen flex-col text-left">
-            <ScrollToTop />
-            <Routes>
-              <Route element={<MainContent />}>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="/company"
-                  element={
-                    <HomeOnlyGuard>
-                      <Company />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/company/ourteam"
-                  element={
-                    <HomeOnlyGuard>
-                      <OurTeam />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/products"
-                  element={
-                    <HomeOnlyGuard>
-                      <Products />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/careers"
-                  element={
-                    <HomeOnlyGuard>
-                      <Careers />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/contactus"
-                  element={
-                    <HomeOnlyGuard>
-                      <ContactUs />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/gallery"
-                  element={
-                    <HomeOnlyGuard>
-                      <Gallery />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/publications"
-                  element={
-                    <HomeOnlyGuard>
-                      <Publications />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/videos"
-                  element={
-                    <HomeOnlyGuard>
-                      <Videos />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/press"
-                  element={
-                    <HomeOnlyGuard>
-                      <Press />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/terms"
-                  element={
-                    <HomeOnlyGuard>
-                      <TC />
-                    </HomeOnlyGuard>
-                  }
-                />
-                <Route
-                  path="/privacypolicy"
-                  element={
-                    <HomeOnlyGuard>
-                      <PrivacyPolicy />
-                    </HomeOnlyGuard>
-                  }
-                />
-              </Route>
-            </Routes>
-          </div>
-        </ComingSoonProvider>
+        <div className="flex min-h-screen flex-col text-left">
+          <ScrollToTop />
+          <Routes>
+            <Route element={<MainContent />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/company" element={<Company />} />
+              <Route path="/company/ourteam" element={<OurTeam />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/publications" element={<Publications />} />
+              <Route path="/videos" element={<Videos />} />
+              <Route path="/press" element={<Press />} />
+              <Route path="/terms" element={<TC />} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            </Route>
+          </Routes>
+        </div>
       </BrowserRouter>
     </>
   );

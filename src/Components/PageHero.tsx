@@ -1,113 +1,165 @@
-type Variant = "about" | "team" | "contact" | "products" | "careers";
+import { heroSlides } from "../content/mediaHub";
+
+type Variant =
+  | "about"
+  | "team"
+  | "contact"
+  | "products"
+  | "careers"
+  | "gallery"
+  | "publications"
+  | "press"
+  | "videos"
+  | "legal";
+
+type SurfaceTone = "warm" | "white" | "dark";
 
 type Props = {
   variant: Variant;
   title: string;
   intro: string;
   badge?: string;
+  /** Background shown below the hero curve — matches the next page section */
+  surfaceTone?: SurfaceTone;
 };
 
-const variantBg: Record<Variant, string> = {
-  about: "bg-gradient-to-br from-deep from-0% via-[#0a0a3d] via-40% to-mid to-100%",
-  team: "bg-gradient-to-br from-navy from-0% via-mid via-55% to-slate to-100%",
-  contact: "bg-gradient-to-br from-deep from-0% via-[#1a1040] via-50% to-mid to-100%",
-  products: "bg-gradient-to-br from-deep from-0% via-[#0d0d4a] via-45% to-mid to-100%",
-  careers: "bg-gradient-to-br from-navy from-0% via-mid via-50% to-[#1a2d5c] to-100%",
+const surfaceBg: Record<SurfaceTone, string> = {
+  warm: "bg-surface-warm",
+  white: "bg-white",
+  dark: "bg-deep",
 };
 
-function PageHero({ variant, title, intro, badge }: Props) {
+const heroImages = heroSlides.filter((s) => s.type === "image").map((s) => s.src);
+
+const variantBackground: Record<Variant, string> = {
+  about: heroImages[0] ?? "",
+  team: heroImages[2] ?? heroImages[0] ?? "",
+  contact: heroImages[1] ?? heroImages[0] ?? "",
+  products: heroImages[3] ?? heroImages[0] ?? "",
+  careers: heroImages[0] ?? "",
+  gallery: heroImages[1] ?? heroImages[0] ?? "",
+  publications: heroImages[2] ?? heroImages[0] ?? "",
+  press: heroImages[0] ?? "",
+  videos: heroImages[1] ?? heroImages[0] ?? "",
+  legal: heroImages[3] ?? heroImages[0] ?? "",
+};
+
+const variantChips: Partial<Record<Variant, string[]>> = {
+  about: ["Amaravati", "India", "Quantum Hardware"],
+  team: ["Leadership", "Research", "Engineering"],
+  contact: ["Partnerships", "Products", "Careers"],
+  products: ["Cryogenics", "Qubit systems", "Open-access"],
+  careers: ["Engineering", "Science", "Amaravati (AQV)"],
+  gallery: ["Facility", "Hardware", "Amaravati"],
+  publications: ["Blogs", "Insights", "Research"],
+  press: ["Media", "Coverage", "News"],
+  videos: ["Lab footage", "Events", "Education"],
+};
+
+function VariantMeta({ variant }: { variant: Variant }) {
+  if (variant === "contact") {
+    return (
+      <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
+        <a
+          href="mailto:Info@qbitforcequantum.com"
+          className="font-semibold text-white no-underline transition-colors duration-200 hover:text-petal"
+        >
+          Info@qbitforcequantum.com
+        </a>
+        <span className="h-1 w-1 rounded-full bg-petal/80" aria-hidden />
+        <span className="text-white/70">Vijayawada, Andhra Pradesh</span>
+      </div>
+    );
+  }
+
+  const chips = variantChips[variant];
+  if (!chips?.length) return null;
+
   return (
-    <section
-      className={`relative overflow-hidden pb-16 pt-[calc(var(--nav-height)+3.5rem)] sm:pb-20 ${variantBg[variant]}`}
-    >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 20% 80%, rgba(255, 30, 38, 0.15) 0%, transparent 45%), radial-gradient(circle at 85% 20%, rgba(93, 143, 216, 0.2) 0%, transparent 40%), linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-          backgroundSize: "100% 100%, 100% 100%, 48px 48px, 48px 48px",
-        }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-[5%] -top-[20%] h-[min(500px,60vw)] w-[min(500px,60vw)] rounded-full bg-[radial-gradient(circle,rgba(255,30,38,0.18)_0%,transparent_65%)]"
-        aria-hidden
-      />
+    <div className="mt-6 flex flex-wrap gap-2">
+      {chips.map((chip) => (
+        <span
+          key={chip}
+          className="rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 font-display text-xs font-semibold text-white/90 backdrop-blur-sm"
+        >
+          {chip}
+        </span>
+      ))}
+    </div>
+  );
+}
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-        <div className="max-w-[800px]">
+function PageHero({ variant, title, intro, badge, surfaceTone = "warm" }: Props) {
+  const bgImage = variantBackground[variant];
+
+  return (
+    <header className="relative">
+      <section className="relative min-h-[min(38vh,360px)] overflow-hidden sm:min-h-[min(42vh,400px)]">
+        {bgImage && (
+          <img
+            src={bgImage}
+            alt=""
+            className="absolute inset-0 h-full w-full scale-105 object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-r from-deep/95 via-deep/82 to-mid/70" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/20 to-deep/50" aria-hidden />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -right-16 top-0 h-72 w-72 rounded-full bg-petal/25 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-blue-light/20 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-12 pt-[calc(var(--nav-height)+1.75rem)] sm:px-8 sm:pb-14 lg:px-10">
           {badge && (
-            <span className="mb-5 inline-block rounded-full border border-petal/35 bg-petal/10 px-3.5 py-1.5 font-display text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-petal">
+            <span className="mb-3 inline-flex w-fit items-center gap-2.5 font-display text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-petal">
+              <span className="h-px w-10 bg-petal" aria-hidden />
               {badge}
             </span>
           )}
-          <h1 className="mb-5 font-display text-[clamp(2.25rem,5vw,3.5rem)] font-bold leading-[1.12] tracking-tight text-white">
+
+          <h1 className="max-w-3xl font-display text-[clamp(1.875rem,4.5vw,3rem)] font-bold leading-[1.1] tracking-tight text-white">
             {title}
           </h1>
-          <p className="max-w-[640px] text-[clamp(1rem,1.8vw,1.125rem)] leading-relaxed text-white/82">
+
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-[1.0625rem] sm:leading-relaxed">
             {intro}
           </p>
 
-          {variant === "about" && (
-            <div className="mt-8 flex flex-wrap items-center gap-3 font-display text-[0.8125rem] font-semibold uppercase tracking-wider text-white/55">
-              <span>Amaravati</span>
-              <span className="h-1 w-1 rounded-full bg-petal" />
-              <span>India</span>
-              <span className="h-1 w-1 rounded-full bg-petal" />
-              <span>Quantum Hardware</span>
-            </div>
-          )}
-
-          {variant === "team" && (
-            <div className="mt-10 flex max-w-[480px] flex-wrap items-center gap-6 rounded-2xl border border-white/10 bg-white/5 p-5 sm:gap-6">
-              <div className="flex flex-col gap-0.5">
-                <strong className="font-display text-[0.9375rem] text-white">RF & Quantum</strong>
-                <span className="text-[0.8125rem] text-white/60">Decades of expertise</span>
-              </div>
-              <div className="hidden h-9 w-px bg-white/20 sm:block" />
-              <div className="flex flex-col gap-0.5">
-                <strong className="font-display text-[0.9375rem] text-white">NQM</strong>
-                <span className="text-[0.8125rem] text-white/60">National Quantum Mission</span>
-              </div>
-            </div>
-          )}
-
-          {variant === "contact" && (
-            <div className="mt-8 flex flex-wrap items-center gap-3 text-[0.9375rem]">
-              <a
-                href="mailto:Info@qbitforcequantum.com"
-                className="border-b border-petal/60 font-semibold text-white no-underline transition hover:border-petal hover:text-petal"
-              >
-                Info@qbitforcequantum.com
-              </a>
-              <span className="h-1 w-1 rounded-full bg-petal" />
-              <span className="text-white/65">Vijayawada, AP</span>
-            </div>
-          )}
-
-          {(variant === "products" || variant === "careers") && (
-            <div className="mt-8 flex flex-wrap gap-2">
-              {(variant === "products"
-                ? ["Cryogenics", "Qubit systems", "Open-access"]
-                : ["Engineering", "Science", "Amaravati (AQV)"]
-              ).map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 font-display text-xs font-semibold text-white/90"
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-          )}
+          <VariantMeta variant={variant} />
         </div>
-      </div>
+      </section>
 
-      <div
-        className="absolute bottom-[-1px] left-0 right-0 h-16 bg-surface-warm [clip-path:ellipse(75%_100%_at_50%_100%)]"
-        aria-hidden
-      />
-    </section>
+      {surfaceTone !== "dark" ? (
+        <div
+          className={`relative z-20 ${surfaceBg[surfaceTone]} rounded-t-[2rem] pb-1 sm:rounded-t-[2.5rem]`}
+        >
+          <div className="mx-auto flex justify-center pt-4 sm:pt-5">
+            <div
+              className="h-1.5 w-16 rounded-full bg-gradient-to-r from-petal via-blue-light to-petal"
+              aria-hidden
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="relative z-20 h-px bg-white/10" aria-hidden />
+      )}
+    </header>
   );
 }
 

@@ -1,10 +1,15 @@
-import Header from "../Components/Header.tsx";
+import PageHero from "../Components/PageHero.tsx";
 
 function TC() {
   return (
     <>
-      <Header title="Terms and Conditions" introText="" />
-      <div className="mx-auto my-16 max-w-[800px] px-5 text-left sm:px-8 lg:px-10">
+      <PageHero
+        variant="legal"
+        badge="Legal"
+        title="Terms and Conditions"
+        intro="Terms governing your use of the Qbit Force Quantum website and services."
+      />
+      <div className="mx-auto max-w-3xl bg-surface-warm px-5 pb-10 pt-2 text-left sm:px-8 sm:pb-12 sm:pt-4 lg:px-10 lg:pb-14">
 
         <div className="mb-6 rounded-2xl border border-border bg-white p-8 text-left shadow-sm [&_h3]:pb-3 [&_h3]:font-display [&_h3]:text-navy [&_h4]:pb-3 [&_h4]:font-display [&_h4]:text-navy [&_p]:text-[1.0625rem] [&_p]:leading-[1.75] [&_p]:text-text-muted">
           <h3>Introduction</h3>

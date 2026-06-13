@@ -1,8 +1,4 @@
-import {
-  companyStoryImages,
-  heroSlides,
-  newsMediaImages,
-} from "../content/mediaHub";
+import { companyStoryImages, heroSlides } from "../content/mediaHub";
 
 export type GalleryItem = {
   id: string;
@@ -15,10 +11,7 @@ export type GalleryItem = {
 export const galleryCategories = [
   { id: "all", label: "All" },
   { id: "facility", label: "Facility" },
-  { id: "events", label: "Events" },
   { id: "hardware", label: "Hardware" },
-  { id: "team", label: "Team" },
-  { id: "news", label: "News" },
 ] as const;
 
 const heroGalleryItems: GalleryItem[] = heroSlides
@@ -31,19 +24,17 @@ const heroGalleryItems: GalleryItem[] = heroSlides
     imageUrl: slide.src,
   }));
 
-const mapMediaToGallery = (
-  items: typeof companyStoryImages,
-): GalleryItem[] =>
+const mapMediaToGallery = (items: typeof companyStoryImages): GalleryItem[] =>
   items.map((item) => ({
     id: item.id,
     title: item.title,
     caption: item.caption,
-    category: item.category,
+    category: item.category === "news" ? ("facility" as const) : item.category,
     imageUrl: item.imageUrl,
   }));
 
+/** Facility & hardware photos only — matches home gallery section */
 export const galleryItems: GalleryItem[] = [
   ...heroGalleryItems,
   ...mapMediaToGallery(companyStoryImages),
-  ...mapMediaToGallery(newsMediaImages),
 ];
