@@ -4,9 +4,11 @@ import Navbar from "../Components/Navbar.tsx";
 import Footer from "../Components/Footer.tsx";
 
 function PageReadyMarker({ onReady }: { onReady: () => void }) {
+  const location = useLocation();
+
   useEffect(() => {
     onReady();
-  }, [onReady]);
+  }, [onReady, location.pathname]);
 
   return null;
 }
@@ -16,15 +18,10 @@ type MainContentProps = {
 };
 
 function MainContent({ onPageReady }: MainContentProps) {
-  const location = useLocation();
-
   return (
     <>
       <Navbar />
-      <main
-        key={location.pathname}
-        className="min-h-[calc(100vh-var(--nav-height))] flex-1 animate-[pageEnter_0.4s_ease-out_both]"
-      >
+      <main className="min-h-[calc(100vh-var(--nav-height))] flex-1">
         <Suspense fallback={null}>
           <>
             <Outlet />

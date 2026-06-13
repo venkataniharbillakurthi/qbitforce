@@ -12,10 +12,10 @@ function Home() {
 
   return (
     <>
-      {/* Sticky hero + Company Story overlay only */}
-      <div className="relative">
+      {/* Hero + Company Story — normal scroll (no sticky pin) */}
+      <div className="relative bg-surface-warm">
         <Hero />
-        <div className="relative z-10 overflow-hidden rounded-t-[2rem] bg-white sm:rounded-t-[2.5rem]">
+        <div className="relative z-10 -mt-4 overflow-hidden rounded-t-[2rem] bg-white sm:-mt-6 sm:rounded-t-[2.5rem]">
           <div
             className="mx-auto mt-4 h-1.5 w-16 rounded-full bg-gradient-to-r from-petal via-blue-light to-petal"
             aria-hidden

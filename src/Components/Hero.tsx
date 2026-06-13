@@ -18,7 +18,7 @@ function Hero() {
   const goToSlide = (index: number) => setActiveIndex(index);
 
   return (
-    <section className="sticky top-0 z-0 h-[50dvh] w-full max-w-none overflow-hidden bg-deep lg:h-[100dvh]">
+    <section className="relative z-0 h-[50dvh] w-full max-w-none overflow-hidden bg-surface-warm lg:h-[100dvh]">
       <div className="absolute inset-0">
         {heroSlides.map((slide, index) => (
           <div
