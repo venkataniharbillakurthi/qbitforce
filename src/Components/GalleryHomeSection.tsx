@@ -74,7 +74,7 @@ function GalleryHomeSection() {
       className="bg-[#f7f5f2] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between lg:items-end">
           <div>
             <span className="font-display text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-petal">
               Visual Stories

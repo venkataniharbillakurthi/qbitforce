@@ -193,7 +193,7 @@ function VideosHomeSection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <span className="font-display text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-petal">
               Watch & Learn
@@ -204,7 +204,7 @@ function VideosHomeSection() {
           </div>
           <Link
             to="/videos"
-            className="shrink-0 rounded-full border border-white/30 px-4 py-1.5 font-display text-xs font-semibold text-white no-underline transition hover:border-white hover:bg-white/10 sm:text-sm"
+            className="inline-flex w-fit shrink-0 self-start items-center rounded-full border border-white/30 px-4 py-1.5 font-display text-xs font-semibold text-white no-underline transition hover:border-white hover:bg-white/10 sm:text-sm"
           >
             View all
           </Link>
