@@ -29,7 +29,7 @@ function ContactUs() {
             role="status"
           >
             <strong className="mb-1 block font-display">Thank you!</strong>
-            Your email client should open with your message ready to send.
+            Your enquiry has been sent. Our team will get back to you within one business day.
           </motion.div>
         )}
 

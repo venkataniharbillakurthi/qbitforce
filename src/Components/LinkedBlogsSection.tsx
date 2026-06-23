@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
 import { articles, type Article } from "../data/articlesData";
+import { useSectionPreload } from "../hooks/useSectionPreload";
+import OptimizedCoverImage from "./OptimizedCoverImage";
 import SectionViewAllLink from "./SectionViewAllLink";
+
+const BLOG_THUMB_WIDTH = 240;
+const HOME_BLOG_LIMIT = 4;
+
+const homeArticles = articles.slice(0, HOME_BLOG_LIMIT);
+
+const BLOG_PRELOAD_TARGETS = homeArticles
+  .filter((article): article is Article & { imageUrl: string } => Boolean(article.imageUrl))
+  .map((article) => ({ url: article.imageUrl, width: BLOG_THUMB_WIDTH }));
 
 const categorySource: Record<Article["category"], string> = {
   publication: "Blog",
@@ -17,7 +28,36 @@ function formatMeta(article: Article) {
   return `${date} | ${source}`;
 }
 
-function LinkedBlogListItem({ article }: { article: Article }) {
+function BlogThumbnail({
+  imageUrl,
+  eager,
+  wrapperClassName,
+}: {
+  imageUrl: string;
+  eager: boolean;
+  wrapperClassName: string;
+}) {
+  return (
+    <div
+      className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-[#e8e6e3] sm:h-24 sm:w-24 ${wrapperClassName}`}
+    >
+      <OptimizedCoverImage
+        src={imageUrl}
+        optimizeWidth={BLOG_THUMB_WIDTH}
+        eager={eager}
+        className="absolute inset-0 h-full w-full"
+      />
+    </div>
+  );
+}
+
+function LinkedBlogListItem({
+  article,
+  eagerImages,
+}: {
+  article: Article;
+  eagerImages: boolean;
+}) {
   const readLinkClass =
     "mt-2 inline-block font-display text-xs font-semibold text-petal no-underline transition hover:underline sm:text-sm";
   const titleLinkClass = "text-text no-underline transition hover:text-petal";
@@ -30,23 +70,13 @@ function LinkedBlogListItem({ article }: { article: Article }) {
             href={article.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 overflow-hidden rounded-md"
+            className="group shrink-0"
           >
-            <img
-              src={article.imageUrl}
-              alt=""
-              className="h-20 w-20 object-cover transition duration-500 hover:scale-105 sm:h-24 sm:w-24"
-              loading="lazy"
-            />
+            <BlogThumbnail imageUrl={article.imageUrl} eager={eagerImages} wrapperClassName="" />
           </a>
         ) : (
-          <Link to="/publications" className="shrink-0 overflow-hidden rounded-md">
-            <img
-              src={article.imageUrl}
-              alt=""
-              className="h-20 w-20 object-cover transition duration-500 hover:scale-105 sm:h-24 sm:w-24"
-              loading="lazy"
-            />
+          <Link to="/publications" className="group shrink-0">
+            <BlogThumbnail imageUrl={article.imageUrl} eager={eagerImages} wrapperClassName="" />
           </Link>
         ))}
       <div className="flex min-w-0 flex-1 flex-col justify-center">
@@ -80,10 +110,13 @@ function LinkedBlogListItem({ article }: { article: Article }) {
 }
 
 function LinkedBlogsSection() {
-  const blogItems = articles;
+  const { sectionRef, preload } = useSectionPreload(BLOG_PRELOAD_TARGETS);
 
   return (
-    <section className="bg-white px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
+    <section
+      ref={sectionRef}
+      className="bg-white px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14"
+    >
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
           <div>
@@ -101,8 +134,8 @@ function LinkedBlogsSection() {
         </div>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2 md:gap-x-8 md:gap-y-8 lg:mt-8">
-          {blogItems.map((article) => (
-            <LinkedBlogListItem key={article.id} article={article} />
+          {homeArticles.map((article) => (
+            <LinkedBlogListItem key={article.id} article={article} eagerImages={preload} />
           ))}
         </div>
       </div>

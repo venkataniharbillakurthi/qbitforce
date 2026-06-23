@@ -111,6 +111,15 @@ export const companyStoryImages: MediaImage[] = [
 
 export const newsMediaImages: MediaImage[] = [
   {
+    id: "news-4",
+    title: "Quantum computing achieves an indigenous milestone",
+    caption:
+      "Business Standard reports that Amaravati Quantum Valley's indigenous dilution refrigerator reached 4 Kelvin at the Quantum Reference Facility in Medha Towers — one of the coldest temperatures achieved in an Indian research facility, with more than 80% domestically sourced components. Qbit Force partnered with AQV and Qubitech to map India's quantum hardware supply chain.",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1782234524/1782054463833_ts5zfk.jpg",
+    category: "news",
+  },
+  {
     id: "news-1",
     title: "SiliconIndia Exclusive Coverage",
     caption:

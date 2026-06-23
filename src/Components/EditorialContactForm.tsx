@@ -34,6 +34,9 @@ const TOTAL_STEPS = stepLabels.length;
 const MAP_EMBED_URL =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d992.5497754437642!2d80.59733120961054!3d16.529997136368806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35ef0074d65639%3A0x543b2e46f32aedf1!2sSubbarayudu%20street%20Bhavanipuram!5e1!3m2!1sen!2sde!4v1776761636438!5m2!1sen!2sde";
 
+const FORM_SUBMIT_EMAIL = "Rupa@qbitforcequantum.com";
+const FORM_SUBMIT_URL = `https://formsubmit.co/ajax/${encodeURIComponent(FORM_SUBMIT_EMAIL)}`;
+
 const contactInfo = [
   {
     label: "Headquarters",
@@ -167,6 +170,8 @@ export default function EditorialContactForm({ onSubmitted }: Props) {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<ContactFormData>(initialForm);
   const [direction, setDirection] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -187,20 +192,47 @@ export default function EditorialContactForm({ onSubmitted }: Props) {
     setStep((s) => Math.max(s - 1, 0));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
 
     const inquiryLabel =
       inquiryOptions.find((o) => o.value === form.inquiryType)?.label ?? form.inquiryType;
-    const subject = encodeURIComponent(`Contact Enquiry — ${inquiryLabel}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nCompany: ${form.company || "N/A"}\nInquiry Type: ${inquiryLabel}\n\nMessage:\n${form.message}`,
-    );
 
-    window.location.href = `mailto:Info@qbitforcequantum.com?subject=${subject}&body=${body}`;
-    setForm(initialForm);
-    setStep(0);
-    onSubmitted?.();
+    const payload = new FormData();
+    payload.append("name", form.name.trim());
+    payload.append("email", form.email.trim());
+    payload.append("phone", form.phone.trim());
+    payload.append("company", form.company.trim() || "N/A");
+    payload.append("inquiryType", inquiryLabel);
+    payload.append("message", form.message.trim());
+    payload.append("_subject", `Contact Enquiry — ${inquiryLabel}`);
+    payload.append("_template", "table");
+    payload.append("_captcha", "false");
+
+    setSubmitting(true);
+
+    try {
+      const response = await fetch(FORM_SUBMIT_URL, {
+        method: "POST",
+        body: payload,
+        headers: { Accept: "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setForm(initialForm);
+      setStep(0);
+      onSubmitted?.();
+    } catch {
+      setSubmitError(
+        "We couldn't send your enquiry right now. Please try again or email Rupa@qbitforcequantum.com directly.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const canProceedStep0 = Boolean(form.inquiryType);
@@ -221,7 +253,20 @@ export default function EditorialContactForm({ onSubmitted }: Props) {
       <div className="flex flex-col px-4 py-6 sm:px-10 sm:py-10 lg:px-12 lg:py-12">
         <ProgressBar step={step} total={TOTAL_STEPS} />
 
-        <form className="flex flex-1 flex-col" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-1 flex-col"
+          action={`https://formsubmit.co/${encodeURIComponent(FORM_SUBMIT_EMAIL)}`}
+          method="POST"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="hidden"
+            name="inquiryType"
+            value={
+              inquiryOptions.find((o) => o.value === form.inquiryType)?.label ?? form.inquiryType
+            }
+          />
+
           <div className="relative flex-1 overflow-hidden">
             <AnimatePresence mode="wait" custom={direction}>
               {step === 0 && (
@@ -386,6 +431,12 @@ export default function EditorialContactForm({ onSubmitted }: Props) {
             </AnimatePresence>
           </div>
 
+          {submitError && (
+            <p className="mb-4 rounded-xl border border-petal/30 bg-petal/5 px-4 py-3 text-sm text-petal" role="alert">
+              {submitError}
+            </p>
+          )}
+
           <div className="mt-8 flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
             <button
               type="button"
@@ -411,13 +462,13 @@ export default function EditorialContactForm({ onSubmitted }: Props) {
             ) : (
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: submitting ? 1 : 1.02 }}
+                whileTap={{ scale: submitting ? 1 : 0.98 }}
                 transition={springSnappy}
-                disabled={!canSubmit}
+                disabled={!canSubmit || submitting}
                 className="cursor-pointer rounded-full bg-gradient-to-r from-petal to-[#e01820] px-8 py-3 font-display text-sm font-semibold text-white shadow-[0_6px_20px_rgba(255,30,38,0.3)] transition hover:shadow-[0_10px_28px_rgba(255,30,38,0.4)] disabled:cursor-not-allowed disabled:opacity-40"
               >
-                Submit Enquiry →
+                {submitting ? "Sending…" : "Submit Enquiry →"}
               </motion.button>
             )}
           </div>

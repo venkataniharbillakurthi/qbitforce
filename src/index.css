@@ -27,6 +27,8 @@
   }
 }
 
+/* --- Animations --- */
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -108,6 +110,8 @@
   }
 }
 
+/* --- Base Styles --- */
+
 @layer base {
   *,
   *::before,
@@ -115,11 +119,9 @@
     box-sizing: border-box;
   }
 
-  html {
-    scroll-behavior: auto;
-    scroll-padding-top: calc(var(--nav-height) + 0.75rem);
-  }
+  
 
+  /* Safely handles system-level reduced motion requests without breaking default behavior */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -128,9 +130,8 @@
     *,
     *::before,
     *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      animation: none !important;
+      transition: none !important;
     }
   }
 

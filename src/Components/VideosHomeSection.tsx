@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { videos, type VideoItem } from "../data/videosData";
+import { useSectionPreload } from "../hooks/useSectionPreload";
+import OptimizedCoverImage from "./OptimizedCoverImage";
+
+const FEATURED_THUMB_WIDTH = 960;
+const STRIP_THUMB_WIDTH = 280;
+
+const VIDEO_PRELOAD_TARGETS = videos
+  .filter((video): video is VideoItem & { thumbnail: string } => Boolean(video.thumbnail))
+  .map((video, index) => ({
+    url: video.thumbnail,
+    width: index === 0 ? FEATURED_THUMB_WIDTH : STRIP_THUMB_WIDTH,
+  }));
+
 function InlinePlayer({ video }: { video: VideoItem }) {
   if (video.youtubeId) {
     return (
@@ -35,13 +48,15 @@ function FeaturedVideoPlayer({
   video,
   isPlaying,
   onPlay,
+  eagerThumbnail = false,
 }: {
   video: VideoItem;
   isPlaying: boolean;
   onPlay: () => void;
+  eagerThumbnail?: boolean;
 }) {
   return (
-    <div className="relative aspect-video min-h-[200px] overflow-hidden rounded-xl sm:min-h-[240px] sm:rounded-2xl">
+    <div className="relative aspect-video min-h-[200px] overflow-hidden rounded-xl bg-deep sm:min-h-[240px] sm:rounded-2xl">
       {isPlaying ? (
         <>
           <InlinePlayer key={video.id} video={video} />
@@ -62,16 +77,16 @@ function FeaturedVideoPlayer({
           aria-label={`Play ${video.title}`}
         >
           {video.thumbnail && (
-            <img
+            <OptimizedCoverImage
               src={video.thumbnail}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-              loading="lazy"
+              optimizeWidth={FEATURED_THUMB_WIDTH}
+              eager={eagerThumbnail}
+              className="absolute inset-0 h-full w-full"
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/40 to-deep/20" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-petal pl-1 text-white shadow-lg shadow-petal/40 transition group-hover:scale-110 sm:h-14 sm:w-14">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-petal pl-1 text-white shadow-lg shadow-petal/40 transition duration-300 [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-110 sm:h-14 sm:w-14">
               ▶
             </div>
           </div>
@@ -102,11 +117,13 @@ function VideoStripCard({
   index,
   isActive,
   onSelect,
+  eagerThumbnail = false,
 }: {
   video: VideoItem;
   index: number;
   isActive: boolean;
   onSelect: () => void;
+  eagerThumbnail?: boolean;
 }) {
   return (
     <button
@@ -119,13 +136,13 @@ function VideoStripCard({
       }`}
       style={{ animationDelay: `${index * 0.08}s` }}
     >
-      <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md sm:h-[4.5rem] sm:w-28">
+      <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md bg-deep sm:h-[4.5rem] sm:w-28">
         {video.thumbnail && (
-          <img
+          <OptimizedCoverImage
             src={video.thumbnail}
-            alt=""
-            className="h-full w-full object-cover transition group-hover:scale-105"
-            loading="lazy"
+            optimizeWidth={STRIP_THUMB_WIDTH}
+            eager={eagerThumbnail}
+            className="absolute inset-0 h-full w-full"
           />
         )}
         <div className="absolute inset-0 flex items-center justify-center bg-deep/30">
@@ -148,6 +165,7 @@ function VideoStripCard({
 }
 
 function VideosHomeSection() {
+  const { sectionRef, preload } = useSectionPreload(VIDEO_PRELOAD_TARGETS);
   const [featured] = videos;
   const [activeVideo, setActiveVideo] = useState<VideoItem>(featured ?? videos[0]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -160,7 +178,10 @@ function VideosHomeSection() {
   };
 
   return (
-    <section className="relative overflow-hidden px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14"
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-deep via-mid to-navy" />
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
@@ -195,6 +216,7 @@ function VideosHomeSection() {
               video={activeVideo}
               isPlaying={isPlaying}
               onPlay={() => setIsPlaying(true)}
+              eagerThumbnail={preload}
             />
           </div>
           <div className="flex flex-col gap-2.5 lg:col-span-2 lg:justify-center">
@@ -205,6 +227,7 @@ function VideosHomeSection() {
                 index={index}
                 isActive={isPlaying && activeVideo.id === video.id}
                 onSelect={() => handleSelectVideo(video)}
+                eagerThumbnail={preload}
               />
             ))}
           </div>

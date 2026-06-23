@@ -13,6 +13,34 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    id: "a5",
+    title: "Amaravati Quantum Facility Reaches 4 Kelvin Milestone",
+    excerpt:
+      "The Amaravati Quantum Reference Facility achieved a major milestone as its indigenous dilution refrigerator successfully reached 4 Kelvin (-269°C), strengthening India's capabilities in cryogenic engineering and advancing the National Quantum Mission. Made in Amaravati, for the World.",
+    date: "2026-06-21",
+    category: "publication",
+    readTime: "3 min",
+    featured: true,
+    author: "Andhra Pradesh Economic Development Board",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1782234524/1782038591880_w5sr3g.jpg",
+    link: "https://www.linkedin.com/posts/quantumcapitalamaravati-nationalquantummission-share-7474411595910103040-KSox/",
+  },
+  {
+    id: "a6",
+    title: "Amaravati at World Cities Summit — Building Cities That Love People Back",
+    excerpt:
+      "Andhra Pradesh Economic Development Board highlights Amaravati's future cities vision at the World Cities Summit, showcasing people-centric urban development alongside the state's quantum innovation agenda under Choose Speed, Choose AP.",
+    date: "2026-06-19",
+    category: "publication",
+    readTime: "3 min",
+    featured: true,
+    author: "Andhra Pradesh Economic Development Board",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1782234882/Screenshot_2026-06-23_224408_zcfbxt.png",
+    link: "https://www.linkedin.com/posts/apedb_worldcitiessummit-amaravati-futurecities-activity-7473334024397090816-hKlI/",
+  },
+  {
     id: "a1",
     title: "Amaravati Quantum Valley Announces Quantum Computers Initiative",
     excerpt:

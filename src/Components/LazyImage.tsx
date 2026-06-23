@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes } from "react";
+import { forwardRef, type ImgHTMLAttributes } from "react";
 import { cloudinaryImageUrl } from "../utils/cloudinary";
 
 type LazyImageProps = ImgHTMLAttributes<HTMLImageElement> & {
@@ -8,22 +8,26 @@ type LazyImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   optimizeWidth?: number;
 };
 
-function LazyImage({
-  src,
-  alt = "",
-  className = "",
-  eager = false,
-  optimizeWidth,
-  decoding = "async",
-  loading,
-  fetchPriority,
-  ...rest
-}: LazyImageProps) {
+const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(function LazyImage(
+  {
+    src,
+    alt = "",
+    className = "",
+    eager = false,
+    optimizeWidth,
+    decoding = "async",
+    loading,
+    fetchPriority,
+    ...rest
+  },
+  ref,
+) {
   const resolvedSrc =
     src && optimizeWidth ? cloudinaryImageUrl(String(src), optimizeWidth) : src;
 
   return (
     <img
+      ref={ref}
       src={resolvedSrc}
       alt={alt}
       className={className}
@@ -33,6 +37,6 @@ function LazyImage({
       {...rest}
     />
   );
-}
+});
 
 export default LazyImage;

@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { galleryItems } from "../data/galleryData";
+import { useSectionPreload } from "../hooks/useSectionPreload";
+import OptimizedCoverImage from "./OptimizedCoverImage";
 import SectionViewAllLink from "./SectionViewAllLink";
+
+const FEATURED_TILE_WIDTH = 960;
+const MOSAIC_TILE_WIDTH = 480;
 
 const categoryLabel: Record<string, string> = {
   facility: "Facility",
@@ -10,25 +15,35 @@ const categoryLabel: Record<string, string> = {
   news: "News",
 };
 
+const GALLERY_HOME_ITEMS = galleryItems.slice(0, 5);
+
+const GALLERY_PRELOAD_TARGETS = GALLERY_HOME_ITEMS.map((item, index) => ({
+  url: item.imageUrl,
+  width: index === 0 ? FEATURED_TILE_WIDTH : MOSAIC_TILE_WIDTH,
+}));
+
 function MosaicTile({
   item,
   className = "",
   large = false,
+  eager = false,
 }: {
   item: (typeof galleryItems)[0];
   className?: string;
   large?: boolean;
+  eager?: boolean;
 }) {
   return (
     <Link
       to="/gallery"
-      className={`group relative block overflow-hidden bg-deep ${className}`}
+      className={`group relative block h-full overflow-hidden bg-deep ${className}`}
     >
-      <img
+      <OptimizedCoverImage
         src={item.imageUrl}
         alt={item.title}
-        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-        loading="lazy"
+        optimizeWidth={large ? FEATURED_TILE_WIDTH : MOSAIC_TILE_WIDTH}
+        eager={eager}
+        className="h-full w-full"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent opacity-80" />
       <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
@@ -48,13 +63,16 @@ function MosaicTile({
 }
 
 function GalleryHomeSection() {
-  const items = galleryItems.slice(0, 5);
-  const [featured, ...rest] = items;
+  const { sectionRef, preload } = useSectionPreload(GALLERY_PRELOAD_TARGETS);
+  const [featured, ...rest] = GALLERY_HOME_ITEMS;
 
   if (!featured) return null;
 
   return (
-    <section className="bg-[#f7f5f2] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
+    <section
+      ref={sectionRef}
+      className="bg-[#f7f5f2] px-5 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14"
+    >
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -75,12 +93,14 @@ function GalleryHomeSection() {
           <MosaicTile
             item={featured}
             large
+            eager={preload}
             className="col-span-2 row-span-2 rounded-l-xl sm:rounded-l-2xl"
           />
           {rest.slice(0, 2).map((item, i) => (
             <MosaicTile
               key={item.id}
               item={item}
+              eager={preload}
               className={i === 1 ? "rounded-tr-xl sm:rounded-tr-2xl" : ""}
             />
           ))}
@@ -88,6 +108,7 @@ function GalleryHomeSection() {
             <MosaicTile
               key={item.id}
               item={item}
+              eager={preload}
               className={i === 1 ? "rounded-br-xl sm:rounded-br-2xl" : ""}
             />
           ))}
