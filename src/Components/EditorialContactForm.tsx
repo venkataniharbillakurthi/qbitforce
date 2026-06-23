@@ -2,7 +2,7 @@ import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "reac
 import { AnimatePresence, motion } from "framer-motion";
 import { easeOut, springSnappy } from "../utils/motion";
 
-export type ContactFormData = {
+type ContactFormData = {
   name: string;
   email: string;
   phone: string;

@@ -59,4 +59,22 @@ export const teamMembers: TeamMember[] = [
     role: "",
     image: teamPhotoUrls.rupa,
   },
+  {
+    id: 6,
+    name: "Sai Bharath",
+    role: "",
+    image: teamPhotoUrls.saiBharath,
+  },
+  {
+    id: 7,
+    name: "Mahesh Kondeti",
+    role: "",
+    image: teamPhotoUrls.maheshKondeti,
+  },
+  {
+    id: 8,
+    name: "Isha Choudhary",
+    role: "",
+    image: teamPhotoUrls.ishaChoudhary,
+  },
 ];

@@ -2,7 +2,6 @@ import type { Transition, Variants } from "framer-motion";
 
 export const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-/** Framer-style spring — snappy but smooth (hover / tap only) */
 export const springSnappy: Transition = {
   type: "spring",
   stiffness: 380,
@@ -23,27 +22,12 @@ export const fadeUp: Variants = {
   visible: { opacity: 1, y: 0 },
 };
 
-export const blurUp: Variants = {
-  hidden: { opacity: 1, y: 0, filter: "blur(0px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-};
-
 export const wordReveal: Variants = {
   hidden: { opacity: 1, y: 0, rotateX: 0 },
   visible: { opacity: 1, y: 0, rotateX: 0 },
 };
 
-export const fadeIn: Variants = {
-  hidden: { opacity: 1 },
-  visible: { opacity: 1 },
-};
-
 export const slideInLeft: Variants = {
-  hidden: { opacity: 1, x: 0 },
-  visible: { opacity: 1, x: 0 },
-};
-
-export const slideInRight: Variants = {
   hidden: { opacity: 1, x: 0 },
   visible: { opacity: 1, x: 0 },
 };

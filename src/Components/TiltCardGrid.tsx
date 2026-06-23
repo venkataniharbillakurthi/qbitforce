@@ -24,6 +24,8 @@ export type TiltCardItem = {
   /** Tailwind aspect class for the photo area, e.g. aspect-[4/5] or aspect-square */
   imageAspect?: string;
   descriptionLines?: number;
+  textCenter?: boolean;
+  imagePosition?: "top" | "center";
 };
 
 type TiltCard3DProps = TiltCardItem;
@@ -36,6 +38,8 @@ function TiltCard3D({
   subtitle,
   imageAspect = "aspect-[4/5]",
   descriptionLines,
+  textCenter = false,
+  imagePosition = "top",
 }: TiltCard3DProps) {
   const ref = useRef<HTMLDivElement>(null);
   const tiltRef = useRef({ x: 0, y: 0 });
@@ -116,10 +120,16 @@ function TiltCard3D({
           alt={imageAlt}
           draggable={false}
           optimizeWidth={640}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
+          className={`pointer-events-none absolute inset-0 h-full w-full object-cover ${
+            imagePosition === "center" ? "object-center" : "object-top"
+          }`}
         />
       </div>
-      <div className="flex min-h-0 flex-1 flex-col justify-start gap-1.5 border-t border-border/40 bg-white p-4 sm:p-5">
+      <div
+        className={`flex min-h-0 flex-1 flex-col justify-start gap-1.5 border-t border-border/40 bg-white p-4 sm:p-5 ${
+          textCenter ? "items-center text-center" : ""
+        }`}
+      >
         {subtitle && (
           <span className="font-display text-[0.625rem] font-bold uppercase tracking-widest text-petal sm:text-[0.6875rem]">
             {subtitle}
@@ -154,13 +164,30 @@ type TiltCardGridProps = {
   items: TiltCardItem[];
   className?: string;
   gap?: number;
+  centered?: boolean;
 };
 
 export default function TiltCardGrid({
   items,
   className = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
   gap = 24,
+  centered = false,
 }: TiltCardGridProps) {
+  if (centered) {
+    return (
+      <div className="flex flex-wrap justify-center" style={{ gap }}>
+        {items.map((item, index) => (
+          <div
+            key={`${item.title}-${index}`}
+            className="w-[calc(50%-0.625rem)] min-w-0 sm:w-[calc(33.333%-0.875rem)] lg:w-48"
+          >
+            <TiltCard3D {...item} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className={`grid w-full items-stretch ${className}`} style={{ gap }}>
       {items.map((item, index) => (

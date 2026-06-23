@@ -8,12 +8,6 @@ export type GalleryItem = {
   imageUrl: string;
 };
 
-export const galleryCategories = [
-  { id: "all", label: "All" },
-  { id: "facility", label: "Facility" },
-  { id: "hardware", label: "Hardware" },
-] as const;
-
 const heroGalleryItems: GalleryItem[] = heroSlides
   .filter((s) => s.type === "image")
   .map((slide) => ({

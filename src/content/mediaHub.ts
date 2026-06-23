@@ -41,7 +41,7 @@ export const teamPhotoUrls = {
   gopaljoshi:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192855/gopaljoshi-CZvOC0Rb_nrwwo5.jpg",
   subhash:
-    "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/Subhash1-7yZhVpAJ_qxiwno.jpg",
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782237574/ChatGPT_Image_Jun_23_2026_11_29_05_PM_zrtfmj.png",
   nagalakshmaiah:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192857/Nagalakshmaiah-xC-2JkVm_qjzjzc.jpg",
   pallavi:
@@ -52,6 +52,12 @@ export const teamPhotoUrls = {
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/Chandanesh-hLko5rXq_cdyf4r.jpg",
   rupa:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192855/Rupa-j_kkHFft_ghwn8g.jpg",
+  saiBharath:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.37_PM_ecpbg4.jpg",
+  maheshKondeti:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.36_PM_wemnut.jpg",
+  ishaChoudhary:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.36_PM_1_zn4mte.jpg",
 } as const;
 
 export type HeroSlide = {

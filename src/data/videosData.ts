@@ -11,12 +11,6 @@ export type VideoItem = {
   thumbnail?: string;
 };
 
-export const videoCategories = [
-  { id: "all", label: "All" },
-  { id: "facility", label: "Facility" },
-  { id: "events", label: "Events" },
-] as const;
-
 export const videos: VideoItem[] = siteVideos.map((v) => ({
   id: v.id,
   title: v.title,

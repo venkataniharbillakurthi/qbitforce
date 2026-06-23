@@ -473,7 +473,7 @@ function AboutUs() {
           </motion.div>
 
           <TiltCardGrid
-            className="grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+            centered
             gap={20}
             items={teamMembers.map((member) => ({
               image: member.image,
@@ -481,6 +481,8 @@ function AboutUs() {
               title: member.name,
               description: member.role || "Core Team",
               imageAspect: "aspect-square",
+              imagePosition: "center",
+              textCenter: true,
             }))}
           />
         </div>

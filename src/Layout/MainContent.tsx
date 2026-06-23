@@ -37,7 +37,7 @@ function MainContent({ onPageReady }: MainContentProps) {
 
 export default MainContent;
 
-const MIN_LOADER_MS = 450;
+const MIN_LOADER_MS = 250;
 const MAX_LOADER_MS = 6000;
 
 export function useRouteLoading() {

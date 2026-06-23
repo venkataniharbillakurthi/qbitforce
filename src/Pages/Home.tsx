@@ -7,6 +7,7 @@ import GalleryHomeSection from "../Components/GalleryHomeSection.tsx";
 import VideosHomeSection from "../Components/VideosHomeSection.tsx";
 import { Link } from "react-router-dom";
 import { partnerLogos } from "../content/mediaHub";
+import LazyImage from "../Components/LazyImage.tsx";
 
 function Home() {
 
@@ -54,9 +55,10 @@ function Home() {
                   key={partner.id}
                   className="flex h-20 w-36 items-center justify-center rounded-xl border border-border bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:h-24 sm:w-44"
                 >
-                  <img
+                  <LazyImage
                     src={partner.imageUrl}
                     alt={partner.name}
+                    optimizeWidth={280}
                     className="max-h-full max-w-full object-contain"
                     loading="lazy"
                   />

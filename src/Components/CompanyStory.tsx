@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { companyStoryImages } from "../content/mediaHub";
+import LazyImage from "./LazyImage";
 
 function CompanyStory() {
   return (
@@ -40,10 +41,11 @@ function CompanyStory() {
                 className="group overflow-hidden rounded-xl border border-border shadow-sm"
               >
                 <div className="aspect-[4/3] overflow-hidden sm:aspect-[16/10]">
-                  <img
+                  <LazyImage
                     src={item.imageUrl}
                     alt={item.title}
-                    className="h-full w-full object-cover object-center"
+                    optimizeWidth={900}
+                    className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
                 </div>

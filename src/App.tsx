@@ -3,6 +3,7 @@ import { lazy } from "react";
 import MainContent, { useRouteLoading } from "./Layout/MainContent.tsx";
 import LoadingScreen from "./Components/LoadingScreen.tsx";
 import ScrollToTop from "./Components/ScrollToTop.tsx";
+import PageMeta from "./Components/PageMeta.tsx";
 import CursorDotTrail from "./Components/CursorDotTrail.tsx";
 
 const Home = lazy(() => import("./Pages/Home.tsx"));
@@ -30,6 +31,7 @@ function AppRoutes() {
         />
       )}
       <ScrollToTop />
+      <PageMeta />
       <Routes>
         <Route element={<MainContent onPageReady={handlePageReady} />}>
           <Route path="/" element={<Home />} />
