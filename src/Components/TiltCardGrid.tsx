@@ -167,6 +167,25 @@ type TiltCardGridProps = {
   centered?: boolean;
 };
 
+function centeredWrapperClass(gridClassName: string): string {
+  if (gridClassName.includes("lg:grid-cols-4")) {
+    return "[--cols:2] md:[--cols:3] lg:[--cols:4]";
+  }
+  if (gridClassName.includes("lg:grid-cols-3")) {
+    return gridClassName.includes("md:grid-cols-3")
+      ? "[--cols:2] md:[--cols:3] lg:[--cols:3]"
+      : "[--cols:1] sm:[--cols:2] lg:[--cols:3]";
+  }
+  if (gridClassName.includes("sm:grid-cols-2")) {
+    return "[--cols:1] sm:[--cols:2]";
+  }
+  return "[--cols:1]";
+}
+
+const centeredItemStyle = {
+  width: "calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols))",
+} as const;
+
 export default function TiltCardGrid({
   items,
   className = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
@@ -175,11 +194,15 @@ export default function TiltCardGrid({
 }: TiltCardGridProps) {
   if (centered) {
     return (
-      <div className="flex flex-wrap justify-center" style={{ gap }}>
+      <div
+        className={`flex flex-wrap justify-center ${centeredWrapperClass(className)}`}
+        style={{ gap, ["--gap" as string]: `${gap}px` }}
+      >
         {items.map((item, index) => (
           <div
             key={`${item.title}-${index}`}
-            className="w-[calc(50%-0.625rem)] min-w-0 sm:w-[calc(33.333%-0.875rem)] lg:w-48"
+            className="min-w-0"
+            style={centeredItemStyle}
           >
             <TiltCard3D {...item} />
           </div>

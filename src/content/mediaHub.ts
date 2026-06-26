@@ -50,12 +50,17 @@ export const teamPhotoUrls = {
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/DurgaPritam-B_hQrdU3_aucbwo.jpg",
   chandanesh:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192856/Chandanesh-hLko5rXq_cdyf4r.jpg",
+  Naseer_Shaik:"https://res.cloudinary.com/dps46p3m8/image/upload/v1782463434/WhatsApp_Image_2026-06-26_at_2.08.30_PM_elanzg.jpg",
   rupa:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1781192855/Rupa-j_kkHFft_ghwn8g.jpg",
-  saiBharath:
-    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.37_PM_ecpbg4.jpg",
+  Soujanya_Chatti:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782461779/WhatsApp_Image_2026-06-26_at_12.54.18_PM_c0jm5s.jpg",
+    Prasanta_Kumbhakar:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782463011/WhatsApp_Image_2026-06-23_at_11.14.36_PM_ahfcpz.jpg",
   maheshKondeti:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.36_PM_wemnut.jpg",
+  saiBharath:
+    "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.37_PM_ecpbg4.jpg",
   ishaChoudhary:
     "https://res.cloudinary.com/dps46p3m8/image/upload/v1782236927/WhatsApp_Image_2026-06-23_at_11.14.36_PM_1_zn4mte.jpg",
 } as const;
@@ -111,8 +116,15 @@ export const companyStoryImages: MediaImage[] = [
       "https://res.cloudinary.com/dps46p3m8/image/upload/v1780937130/WhatsApp_Image_2026-06-07_at_6.53.46_PM_vshegz.jpg",
     category: "facility",
   },
-  
- 
+  {
+    id: "gallery-srm-leadership-visit",
+    title: "Leadership Visit at SRM University AP",
+    caption:
+      "Reviewing quantum and computing innovations with students and faculty at SRM University AP.",
+    imageUrl:
+      "https://res.cloudinary.com/dps46p3m8/image/upload/v1782461778/WhatsApp_Image_2026-06-25_at_10.20.07_PM_lxrjmn.jpg",
+    category: "events",
+  },
 ];
 
 export const newsMediaImages: MediaImage[] = [
